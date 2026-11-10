@@ -1,8 +1,8 @@
 # Link Check — Developer Onboarding Guide "Further Reading" Box
 
 **Date checked:** 2026-11-10 (UTC)
-**Method:** live fetch of each URL; heading and quote captured verbatim from the fetched content. Both pages loaded without error.
-**Purpose:** fresh, live verification of the two claims in the guide's "further reading" box ahead of the ship date.
+**Method:** Live fetch of each URL; headings and quotes captured verbatim from the fetched content. Both pages loaded without error.
+**Purpose:** Fresh, live verification of the two claims in the guide's "further reading" box before the ship date.
 
 ---
 
@@ -12,14 +12,12 @@
 |---|---|
 | URL | https://example.com |
 | Page loaded | OK (no error) |
-| Main heading (verbatim) | *(none)* — the live page contains **no heading element at all**. "Example Domain" survives only as the HTML document title (`<title>Example Domain</title>`). |
+| Main heading (verbatim) | **None.** The live page contains **no heading element at all**. "Example Domain" survives only as the HTML document title (`<title>Example Domain</title>`). |
 | Quoted line from body | "This domain is for use in documentation examples without needing permission." |
 | Guide's claim | https://example.com opens with the heading 'Example Domain'. |
 | Verdict | **DOES NOT MATCH (as literally stated)** |
 
 **Reading:** the current live page still carries the same message as the old one ("This domain is for use in documentation examples without needing permission…"), but the step the claim relies on — the `<h1>` — is gone; "Example Domain" remains only the browser-tab title. If the guide's intent is simply "point readers at a reserved domain for documentation examples," the URL is still fine and should be reworded, not deleted. If the intent is literally "the page opens with the heading 'Example Domain'", that wording is now false.
-
----
 
 ## Entry 2 — https://www.iana.org/domains/reserved
 
@@ -32,7 +30,7 @@
 | Guide's claim | this page lists the four special-use top-level domains .test, .example, .invalid and .localhost |
 | Verdict | **DOES NOT MATCH** |
 
-**Reading:** the live page does **not** contain the four names named in the claim. Its sections are "Example domains", "Test IDN top-level domains", "Policy-reserved domains", and "Other Special-Use Domains". Those four names appear in IANA's separate **Special-Use Domain Names** registry (referenced from this page) rather than on this reserved-domains page — the registry at https://www.iana.org/assignments/special-use-domain-names is the authoritative pointer for claim 2.
+**Reading:** the live page does **not** contain the four names named in the claim. Its sections are "Example domains", "Test IDN top-level domains", "Policy-reserved domains", and "Other Special-Use Domains". Those four names appear in IANA's separate **Special-Use Domain Names** registry (RFC 6761), referenced from this page rather than listed there — the registry at https://www.iana.org/assignments/special-use-domain-names is the authoritative pointer for claim 2.
 
 ---
 
