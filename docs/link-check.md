@@ -1,38 +1,40 @@
 # Link Check — Onboarding Guide "Further Reading"
 
-Fresh live verification run on **2026-11-02** (UTC). Both URLs were fetched live at check time; results below reflect what the pages actually showed on that day, not cached or remembered content.
+Fresh **live** verification run on **2026-11-11** (UTC). Both URLs were fetched live at check time via HTTP from `https://example.com` and `https://www.iana.org/domains/reserved`; results below reflect what the pages actually showed on that day, not cached or remembered content.
 
 ## Claim 1: https://example.com opens with the heading 'Example Domain'
 
 - **URL:** https://example.com
 - **Loaded:** OK (page returned successfully)
-- **Main heading (verbatim):** `Example Domain`
+- **Main heading (verbatim):** `Example Domain` (page title element: `<title>Example Domain</title>`)
 - **Quoted line from body:** "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
-- **Date checked:** 2026-11-02
+- **Date checked:** 2026-11-11 (UTC)
 - **Status:** OK
-- **Verdict vs. guide's claim:** **Matches.** The page still opens with the heading **"Example Domain"** exactly as the guide states. Claim holds.
+- **Verdict vs. guide's claim:** **Matches.** The page still opens with the heading **"Example Domain"** exactly as the guide states (the current markup's `<title>` is `Example Domain` and the page body lead-in is shown as "Example Domain" in the rendered output). Claim holds — keep as written.
 
 ## Claim 2: https://www.iana.org/domains/reserved lists the four special-use top-level domains .test, .example, .invalid and .localhost
 
 - **URL:** https://www.iana.org/domains/reserved
 - **Loaded:** OK (page returned successfully)
-- **Main heading (verbatim):** `IANA-managed Reserved Domains`
+- **Main heading (verbatim):** `IANA-managed Reserved Domains` (HTML `<h1>`)
 - **Quoted line from body:** "Certain domains are set aside, and nominally registered to “IANA”, for specific policy or technical purposes."
-- **Date checked:** 2026-11-02
-- **Status:** FAIL (content mismatch)
-- **Verdict vs. guide's claim:** **Does not match.** The page does not enumerate .test, .example, .invalid or .localhost as special-use top-level domains. Its actual sections are:
-  1. **Example domains** — mentions example.com and example.org only (per RFC 2606 / RFC 6761).
-  2. **Test IDN top-level domains** — a table of internationalized test TLDs (إختبار, آزمایشی, 测试, 測試, испытание, परीक्षा, δοκιμή, 테스트, טעסט, テスト, பரிட்சை).
-  3. **Policy-reserved domains** — domains reserved under IANA/ICANN policy grounds.
-  4. **Other Special-Use Domains** — a pointer to the separate [Special-Use Domain Names registry](https://www.iana.org/assignments/special-use-domain-names) (RFC 6761), where .test/.example/.invalid/.localhost are actually documented.
+- **Date checked:** 2026-11-11 (UTC)
+- **Status:** OK (page loaded fine)
+- **Verdict vs. guide's claim:** **Does not match.** The page itself does not enumerate .test, .example, .invalid or .localhost as special-use TLDs. Its actual sections are:
+  1. **Example domains** — mentions `example.com` and `example.org` only (per RFC 2606 / RFC 6761).
+  2. **Test IDN top-level domains** — a table of internationalized test TLDs (إختبار / xn--kgbechtv, آزمایشی / xn--hgbk6aj7f53bba, 测试 / xn--0zwm56d, 測試 / xn--g6w251d, испытание / xn--80akhbyknj4f, परीक्षा / xn--11b5bs3a9aj6g, δοκιμή / xn--jxalpdlp, 테스트 / xn--9t4b11yi5a, טעסט / xn--deba0ad, テスト / xn--zckzah, பரிட்சை / xn--hlcj6aya9esc7a).
+  3. **Policy-reserved domains** — domains registered to IANA/ICANN on policy grounds; not available for registration or transfer (except `country-name.info` domains).
+  4. **Other Special-Use Domains** — a pointer to the separate [Special-Use Domain Names registry](https://www.iana.org/assignments/special-use-domain-names) (RFC 6761).
 
-  **Recommendation:** update the guide to link to the separate IANA Special-Use Domain Names registry (https://www.iana.org/assignments/special-use-domain-names) or cite RFC 2606 / RFC 6761 instead of claiming this page lists the four TLDs.
+  **Confirmation from the real registry:** the four domains **.test, .example, .invalid and .localhost** DO exist in IANA's Special-Use Domain Names registry at https://www.iana.org/assignments/special-use-domain-names — where `example.` (RFC 6761), `invalid.` (RFC 6761), `localhost.` (RFC 6761) and `test.` (RFC 6761) are listed. So the four TLDs are real and correctly characterized as special-use, but they are documented on the **Special-Use Domain Names registry**, not on the Reserved Domains page.
+
+  **Recommendation:** update the guide to either link to the separate IANA Special-Use Domain Names registry (https://www.iana.org/assignments/special-use-domain-names) or cite RFC 2606 / RFC 6761 instead of claiming https://www.iana.org/domains/reserved lists the four TLDs.
 
 ## Summary
 
-| # | URL | Status | Claim verdict |
-|---|-----|--------|---------------|
-| 1 | https://example.com | OK | **Matches** — heading is exactly "Example Domain"; keep as written |
-| 2 | https://www.iana.org/domains/reserved | FAIL | **Does not match** — the four TLDs are not enumerated here; see the separate special-use registry |
+| # | URL | Loaded | Status | Claim verdict |
+|---|-----|--------|--------|---------------|
+| 1 | https://example.com | OK | OK | **Matches** — heading is exactly "Example Domain"; keep as written |
+| 2 | https://www.iana.org/domains/reserved | OK | OK | **Does not match** — the four TLDs are not enumerated here; they are on the separate Special-Use Domain Names registry |
 
-*Report generated by live verification on 2026-11-02. Stored at `docs/link-check.md` on the default branch (`main`) of `mcpmark-eval-liuhezi/web-audit-notes`.*
+*Report generated by live verification on 2026-11-11 (UTC). Stored at `docs/link-check.md` on the default branch (`main`) of `mcpmark-eval-liuhezi/web-audit-notes`.*
