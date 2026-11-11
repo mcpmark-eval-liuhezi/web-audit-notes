@@ -1,34 +1,38 @@
-# Link Check Report — Developer Onboarding Guide ("Further Reading" Box)
+# Link Check — Onboarding Guide "Further Reading"
 
-**Date checked:** 2026-11-11 (UTC)
-**Source of truth:** Live fetch of both URLs on the date above (not from cached memory).
-**Scope:** Two claims currently in the guide's "further reading" box.
+Fresh live verification run on **2026-11-02** (UTC). Both URLs were fetched live at check time; results below reflect what the pages actually showed on that day, not cached or remembered content.
 
----
-
-## Claim 1 — https://example.com
+## Claim 1: https://example.com opens with the heading 'Example Domain'
 
 - **URL:** https://example.com
-- **Status:** OK (page loaded fine)
-- **Captured heading (verbatim):** `Example Domain`
-- **Quoted line from body:** "This domain is for use in documentation examples without needing permission." (Note: the page has been redesigned; it now also warns: "This is not a service; avoid relying on it for testing and monitoring purposes.")
-- **Verdict vs. guide's claim:** **Matches.** The page still opens with the heading **"Example Domain"**, exactly as the guide states.
+- **Loaded:** OK (page returned successfully)
+- **Main heading (verbatim):** `Example Domain`
+- **Quoted line from body:** "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
+- **Date checked:** 2026-11-02
+- **Status:** OK
+- **Verdict vs. guide's claim:** **Matches.** The page still opens with the heading **"Example Domain"** exactly as the guide states. Claim holds.
 
-## Claim 2 — https://www.iana.org/domains/reserved
+## Claim 2: https://www.iana.org/domains/reserved lists the four special-use top-level domains .test, .example, .invalid and .localhost
 
 - **URL:** https://www.iana.org/domains/reserved
-- **Status:** OK (page loaded fine)
-- **Captured heading (verbatim):** `IANA-managed Reserved Domains`
-- **Quoted line from body:** "Certain domains are set aside, and nominally registered to IANA, for specific policy or technical purposes." (The page also references the Special-Use Domain Names registry at `/assignments/special-use-domain-names`, rather than listing the four TLDs directly.)
-- **Verdict vs. guide's claim:** **Does not match.** The page no longer lists `.test`, `.example`, `.invalid`, and `.localhost` as an enumerated set. What it actually shows is: an "Example domains" section (example.com, example.org per RFC 2606 / RFC 6761), a "Test IDN top-level domains" table of non-Latin IDN variants (إختبار, آزمایشی, テスト, etc.), a "Policy-reserved domains" section, and a pointer to a separate "Other Special-Use Domains" registry (`/assignments/special-use-domain-names`). The four root TLDs live in that separate registry, not on this page. **Recommendation:** update the guide to link to the Special-Use Domain Names registry (or cite RFC 2606 / RFC 6761) instead of claiming this page lists the four TLDs.
+- **Loaded:** OK (page returned successfully)
+- **Main heading (verbatim):** `IANA-managed Reserved Domains`
+- **Quoted line from body:** "Certain domains are set aside, and nominally registered to “IANA”, for specific policy or technical purposes."
+- **Date checked:** 2026-11-02
+- **Status:** FAIL (content mismatch)
+- **Verdict vs. guide's claim:** **Does not match.** The page does not enumerate .test, .example, .invalid or .localhost as special-use top-level domains. Its actual sections are:
+  1. **Example domains** — mentions example.com and example.org only (per RFC 2606 / RFC 6761).
+  2. **Test IDN top-level domains** — a table of internationalized test TLDs (إختبار, آزمایشی, 测试, 測試, испытание, परीक्षा, δοκιμή, 테스트, טעסט, テスト, பரிட்சை).
+  3. **Policy-reserved domains** — domains reserved under IANA/ICANN policy grounds.
+  4. **Other Special-Use Domains** — a pointer to the separate [Special-Use Domain Names registry](https://www.iana.org/assignments/special-use-domain-names) (RFC 6761), where .test/.example/.invalid/.localhost are actually documented.
 
----
+  **Recommendation:** update the guide to link to the separate IANA Special-Use Domain Names registry (https://www.iana.org/assignments/special-use-domain-names) or cite RFC 2606 / RFC 6761 instead of claiming this page lists the four TLDs.
 
 ## Summary
 
-| Claim | URL | Status | Verdict |
-| --- | --- | --- | --- |
-| example.com opens with heading "Example Domain" | https://example.com | OK | **Matches** — keep as written |
-| IANA page lists .test, .example, .invalid, .localhost | https://www.iana.org/domains/reserved | OK | **Does not match** — page redDuring a redesign. Re-point the guide to IANA's Special-Use Domain Names registry (https://www.iana.org/assignments/special-use-domain-names) or RFC 2606/6761. |
+| # | URL | Status | Claim verdict |
+|---|-----|--------|---------------|
+| 1 | https://example.com | OK | **Matches** — heading is exactly "Example Domain"; keep as written |
+| 2 | https://www.iana.org/domains/reserved | FAIL | **Does not match** — the four TLDs are not enumerated here; see the separate special-use registry |
 
-*Report generated automatically as part of the onboarding-guide audit. Re-run before publish if pages change.*
+*Report generated by live verification on 2026-11-02. Stored at `docs/link-check.md` on the default branch (`main`) of `mcpmark-eval-liuhezi/web-audit-notes`.*
