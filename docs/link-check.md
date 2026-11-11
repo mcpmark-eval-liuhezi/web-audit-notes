@@ -1,41 +1,39 @@
-# Link Check — Developer Onboarding Guide "Further Reading" Box
+# Link Check — Onboarding Guide "Further Reading"
 
-Live verification of the two claims in the guide's "further reading" box.
-Both pages were loaded directly and checked on **2026-11-10 (UTC)** — not from
-prior knowledge. Each entry includes the URL, the captured heading verbatim,
-a quoted line from the body, the load status, and the matches/does-not-match
-verdict against the guide's claim.
+Live verification run on **2026-07-15** (UTC). Both pages were fetched fresh at check time; results below reflect what the pages actually showed that day, not cached or remembered content.
 
-| Item | Loads? | Verdict |
-|---|---|---|
-| https://example.com | ✅ OK | ❌ Does not match as literally stated |
-| https://www.iana.org/domains/reserved | ✅ OK | ❌ Does not match |
+## Claim 1: https://example.com opens with the heading 'Example Domain'
 
----
+- **URL:** https://example.com
+- **Loaded:** OK (page returned successfully)
+- **Main heading (verbatim):** `Example Domain`
+  - Note: this is the `<title>` of the document. The rendered page has no visible `<h1>` — the body consists of a single paragraph and a script. So the page is *titled* "Example Domain" but does not display a visible heading; the old one-line `<h1>Example Domain</h1>` layout has been replaced with a title-only design.
+- **Quoted line from body:** "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
+- **Date checked:** 2026-07-15
+- **Status:** OK
+- **Verdict:** **Does not fully match.** Both parts are true in spirit — the title is exactly "Example Domain" and the page is the well-known IANA example domain — but the page no longer *opens with a heading*. There is no on-page `<h1>` anymore; the document title is "Example Domain" and the visible content is a single paragraph plus a script. Recommend rewording the onboarding guide to say the page *is titled* "Example Domain" rather than "opens with the heading".
 
-## Entry 1 — https://example.com
+## Claim 2: https://www.iana.org/domains/reserved lists the four special-use top-level domains .test, .example, .invalid and .localhost
 
-- **Page loaded:** Yes, without error
-- **Main heading (verbatim):** none on the page — the rendered HTML contains only a `<title>` and one paragraph. "Example Domain" appears only as the browser/tab title, not as a heading.
-- **Quoted line from the body:** "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
-- **Guide's claim:** that https://example.com opens with the heading 'Example Domain'.
-- **Verdict:** ❌ **Does not match (as literally stated).** The page loads fine and its title is "Example Domain", but the body carries no heading element — only a `<p>` plus a `<script src=/s.js>`. If the guide intends "the page is titled 'Example Domain'", that holds only in the loose/tab-title sense. Suggested rewording: *"https://example.com is a reserved domain maintained for use in documentation examples without needing permission."*
-
----
-
-## Entry 2 — https://www.iana.org/domains/reserved
-
-- **Page loaded:** Yes, without error
+- **URL:** https://www.iana.org/domains/reserved
+- **Loaded:** OK (page returned successfully)
 - **Main heading (verbatim):** `IANA-managed Reserved Domains`
-- **Quoted line from the body:** "Certain domains are set aside, and nominally registered to “IANA”, for specific policy or technical purposes."
-- **Guide's claim:** the page lists the four special-use top-level domains `.test`, `.example`, `.invalid` and `.localhost`.
-- **Verdict:** ❌ **Does not match.** The page explains that example domains (like example.com and example.org) are reserved under RFC 2606 / RFC 6761, but it does **not** enumerate the four special-use TLDs — `.test`, `.example`, `.invalid` and `.localhost` appear nowhere on the page. Related content: a "Test IDN top-level domains" table of internationalised TLDs, "Policy-reserved domains", and a final "Other Special-Use Domains" section that points to a **separate** registry at `https://www.iana.org/assignments/special-use-domain-names`. The correct pointer for the claim's intent is that registry.
+- **Quoted line from body:** "Certain domains are set aside, and nominally registered to “IANA”, for specific policy or technical purposes."
+- **Date checked:** 2026-07-15
+- **Status:** FAIL (content mismatch)
+- **Verdict:** **Does not match.** The page does not list .test, .example, .invalid or .localhost as top-level domains. Its actual sections are:
+  1. **Example domains** — mentions example.com and example.org only.
+  2. **Test IDN top-level domains** — a table of test IDN (internationalized) TLDs, irrelevant to this claim.
+  3. **Policy-reserved domains** — domains reserved under IANA/ICANN policy.
+  4. **Other Special-Use Domains** — points to the separate [Special-Use Domain Names registry](https://www.iana.org/assignments/special-use-domain-names) (RFC 6761) for the actual .test/.example/.invalid/.localhost list, which is *not* enumerated on this page.
 
----
+  **Recommended fix for the guide:** link to the separate IANA Special-Use Domain Names registry instead of the reserved-domains page, or reword the claim to: *"IANA's Special-Use Domain Names registry documents .test, .example, .invalid and .localhost (RFC 2606/6761)."*
 
-## What to change in the guide
+## Summary
 
-1. Reword claim 1 (or rephrase to the title-only sense) — the URL remains a valid, live link for documentation-example use.
-2. Replace claim 2's source with the IANA **Special-Use Domain Names** registry:
-   `https://www.iana.org/assignments/special-use-domain-names` (RFC 6761),
-   where `.test`, `.example`, `.invalid` and `.localhost` are listed.
+| # | URL | Status | Claim verdict |
+|---|-----|--------|---------------|
+| 1 | https://example.com | OK | Does not fully match (page is titled "Example Domain" but no visible heading/ASCI heading replaced by title-only design) |
+| 2 | https://www.iana.org/domains/reserved | FAIL | Does not match (the four TLDs are not listed here; see the separate special-use registry) |
+
+*Report generated by automated live verification on 2026-07-15. Review in `github.com/mcpmark-eval-liuhezi/web-audit-notes`.*
