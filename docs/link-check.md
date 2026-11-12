@@ -1,37 +1,39 @@
-# Link Check Report — Developer Onboarding Guide "Further Reading" Box
+# Link Check Report — Developer Onboarding Guide ("Further Reading" Box)
 
-**Repository:** `mcpmark-eval-liuhezi/web-audit-notes`  
-**File:** `docs/link-check.md`  
-**Date checked:** 2026-07-15  
-**Method:** Live fetch of each URL at time of writing (verified fresh, not from memory or cached documentation).
+**Date checked:** 2026-07-15
+**Method:** Live fetch of each URL on the day of checking (not from memory or cached documentation).
+**Repository:** `mcpmark-eval-liuhezi/web-audit-notes` (default branch: `main`)
+**File:** `docs/link-check.md`
 
-## Summary
-
-| # | URL | Captured heading (verbatim) | Page loaded? | Verdict vs. guide claim |
-|---|-----|---------------------------|--------------|--------------------------|
-| 1 | https://example.com | `Example Domain` | Yes — OK | **Matches** |
-| 2 | https://www.iana.org/domains/reserved | `IANA-managed Reserved Domains` | Yes — OK | **Does not match** (as worded) |
+---
 
 ## Entry 1: https://example.com
 
+- **URL:** https://example.com
+- **Load status:** OK — page loaded successfully.
 - **Captured main heading (verbatim):** `Example Domain`
 - **Quoted line from body:** "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
-- **Page loaded:** Yes — fetch succeeded (`ok: true`), content retrieved.
-- **Guide's claim:** The page opens with the heading '$(Example Domain)'.
-- **Verdict:** **Matches.** The main heading on https://example.com is exactly `Example Domain`, so this part of the guide's claim still holds.
-- **Notes:** The body copy has been updated relative to older versions of the page; it now includes a caveat: "This is not a service; avoid relying on it for testing and monitoring purposes." If the onboarding guide suggests using example.com for live tests, consider flagging that it should not be relied on for testing/monitoring.
+- **Guide's claim:** https://example.com opens with the heading 'Example Domain'.
+- **Verdict:** **Matches.** The claim held at time of check. The page's `<h1>` reads exactly `Example Domain`, so this part of the guide is still accurate.
+
+---
 
 ## Entry 2: https://www.iana.org/domains/reserved
 
+- **URL:** https://www.iana.org/domains/reserved
+- **Load status:** OK — page loaded successfully.
 - **Captured main heading (verbatim):** `IANA-managed Reserved Domains`
-- **Quoted line from body:** "As described in RFC 2606 and RFC 6761, a number of domains such as example.com and example.org are maintained for documentation purposes."
-- **Page loaded:** Yes — fetch succeeded (`ok: true`), content retrieved.
-- **Guide's claim:** The IANA page lists the four special-use top-level domains `.test`, `.example`, `.invalid` and `.localhost`.
-- **Verdict:** **Does not match (as stated).** The page does **not** enumerate `.test`, `.example`, `.invalid` and `.localhost` as a four-item list. Instead, it explains that such domains are covered by **RFC 2606** and **RFC 6761**, and points readers to a separate **Special-Use Domain Names** registry at `/assignments/special-use-domain-names`. The page's own sections cover: *Example domains*, *Test IDN top-level domains*, *Policy-reserved domains*, and *Other Special-Use Domains*. The four names `.test`, `.example`, `.invalid` and `.localhost` are not explicitly listed anywhere on this page.
-- **Recommendation:** Update the guide's wording to say the IANA Reserved Domains page (per RFC 2606 / RFC 6761) documents example domains and points to the Special-Use Domain Names registry for the full list of special-use domains, rather than claiming the page lists .test, .example, .invalid and .localhost.
+- **Quoted line from body:** "Certain domains are set aside, and nominally registered to “IANA”, for specific policy or technical purposes."
+- **Guide's claim:** The IANA page at https://www.iana.org/domains/reserved lists the four special-use top-level domains .test, .example, .invalid and .localhost.
+- **Verdict:** **Does not match as stated.** The page loaded fine and its heading is "IANA-managed Reserved Domains," but it does not enumerate .test, .example, .invalid, and .localhost as "four special-use top-level domains." Instead, it covers: example domains (example.com, example.org) maintained for documentation purposes per RFC 2606 and RFC 6761; Test IDN top-level domains (xn--kgbechtv, xn--hgbk6aj7f53bba, xn--0zwm56d, xn--g6w251d, xn--80akhbyknj4f, xn--11b5bs3a9aj6g, xn--jxalpdlp, xn--9t4b11yi5a, xn--deba0ad, xn--zckzah, xn--hlcj6aya9esc7a); and policy-reserved domains. The page explicitly points to a separate **Special-Use Domain Names registry** (`/assignments/special-use-domain-names`) and RFC 6761 for the full list of special-use domains. Recommendation: reword the guide to say the IANA Special-Use Domain Names registry (referenced from the reserved domains page) documents .test, .example, .invalid, and .localhost, rather than claiming this page lists them.
 
-## Action items before shipping
+---
 
-1. Keep the https://example.com heading claim — it verified live and still matches.
-2. Revise the https://www.iana.org/domains/reserved description to reference RFC 2606 / RFC 6761 and the Special-Use Domain Names registry (`/assignments/special-use-domain-names`) instead of a four-item list.
-3. Optionally add a note that example.com now carries a disclaimer against relying on it for testing and monitoring purposes.
+## Summary
+
+| # | URL | Loaded | Heading (verbatim) | Claim verdict |
+|---|-----|--------|--------------------|---------------|
+| 1 | https://example.com | OK | `Example Domain` | Matches |
+| 2 | https://www.iana.org/domains/reserved | OK | `IANA-managed Reserved Domains` | Does not match as stated (page discusses example domains, Test IDN TLDs, and policy-reserved domains; points to the separate Special-Use Domain Names registry for .test/.example/.invalid/.localhost) |
+
+**Action for onboarding guide update:** Claim 1 is still accurate. Claim 2 should be rephrased to reference IANA's Special-Use Domain Names registry (linked from the reserved domains page) or RFC 6761, which is where .test, .example, .invalid, and .localhost are formally documented.
